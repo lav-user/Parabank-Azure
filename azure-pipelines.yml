@@ -139,7 +139,7 @@ steps:
     do
       echo ${file}
       curl -iv --raw \
-      -u admin:admin \
+      -u demo:${PROD_PASSWORD} \
       -H "accept: application/json" \
       -H "Content-Type: multipart/form-data" \
       -F "file=@${file}" \
