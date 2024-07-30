@@ -133,4 +133,22 @@ steps:
     echo -e "\nPush assets to PROD.\n"
     echo Placeholder
     echo -e "\nDone."
+    echo -e "\nUploading Files.\n"
+    cd virt
+    for file in *
+    do
+      echo ${file}
+      curl -iv --raw \
+      -u admin:admin \
+      -H "accept: application/json" \
+      -H "Content-Type: multipart/form-data" \
+      -F "file=@${file}" \
+      "http://34.221.210.114:9080/soavirt/api/v6/files/upload?id=%2FVirtualAssets%2F${file}&deploy=false&replace=true" \
+      -o upload.log
+
+      echo -e "\nDebug.\n"
+      cat upload.log
+      sleep 5s
+      echo -e "\nDone."
+    done
   displayName: 'Push to PROD'
